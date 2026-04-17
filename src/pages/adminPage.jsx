@@ -10,7 +10,7 @@ import OrdersAdminPage from "./admin/ordersPageAdmin";
 
 export default function AdminPage(){
     return(
-        <div className="w-full h-screen bg-amber-400 flex">
+        <div className="w-full h-screen bg-amber-100 flex">
             
             <div className="w-[300px] h-full flex-col justify-center items-center bg-white">
             <span className="text-blue-900 text-3xl  ">Admin Panel</span>
