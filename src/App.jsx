@@ -17,7 +17,7 @@ function App() {
   return (
     <BrowserRouter>
     <GoogleOAuthProvider clientId={clientId}>
-     <div className="w-full h-screen flex justify-center items-center">
+     <div className="w-full h-screen flex justify-center items-center bg-amber-50">
       <Toaster position="top-right"/>
        <div className="w-full h-full">
         <Routes path="/">
