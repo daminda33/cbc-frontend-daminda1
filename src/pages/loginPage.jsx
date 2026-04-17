@@ -67,7 +67,7 @@ export default function LoginPage(){
     return(
         
         <div className="w-full h-screen flex justify-center items-center bg-[url(./loginbg.jpg)] bg-cover bg-center">
-            <div className="w-[500px] h-[500px] backdrop-blur-sm shadow-2xl bg-blue-50 rounded-3xl items-center flex flex-col justify-center relative">
+            <div className="w-[500px] h-[500px] backdrop-blur-sm shadow-2xl bg-black rounded-3xl items-center flex flex-col justify-center relative">
                 <h1 className="absolute top-[20px] text-2xl text-white font-bold text-center my-5">Login</h1>
                 <div className="w-[350px] flex flex-col">
                     <span className="text-lg text-white">Email</span> 
