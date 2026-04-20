@@ -1,4 +1,4 @@
-import { Link, Route, Routes } from "react-router-dom";
+import { Link, Route, Routes, useNavigate } from "react-router-dom";
 import { FaBoxOpen } from "react-icons/fa";
 import { FaShoppingBag } from "react-icons/fa";
 import { FaUsers } from "react-icons/fa";
@@ -7,11 +7,42 @@ import ProductsAdminPage from "./admin/productsAdminPage";
 import AddProductPage from "./admin/addProductAdminPage";
 import UpdateProductPage from "./admin/updateProduct";
 import OrdersAdminPage from "./admin/ordersPageAdmin";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import Loader from "../components/loader";
+import toast from "react-hot-toast";
 
 export default function AdminPage(){
+    const navigate = useNavigate();
+    const [adminValidated, setAdminValidated]=useState(false)
+
+    useEffect(
+        ()=> {
+            const token = localStorage.getItem("token");
+            if (token == null){
+                toast.error("You are not logged in");
+                navigate("/login");
+            }else{
+                axios.get(import.meta.env.VITE_BACKEND_URL + "/api/users/", {
+                    headers:{
+                        Authorization: `Bearer ${token}`,
+                    }
+                }).then((response)=>{
+                    console.log(response)
+                    if(response.data.role == "admin") {
+                        setAdminValidated(true);
+                    }else{
+                        toast.error("You are not authorised");
+                        navigate("/login")
+                    }
+                })
+            }
+        }
+    ,[])
+    
     return(
         <div className="w-full h-screen flex">
-            
+            { adminValidated? <>
             <div className="w-[300px] h-full flex-col justify-center items-center bg-white">
             <span className="text-blue-900 text-3xl  ">Admin Panel</span>
             <Link className=" h-[50px] w-full text-2xl gap-2 flex border p-2 mt-5" to="/admin/products"> <FaBoxOpen /> Products</Link>
@@ -31,6 +62,7 @@ export default function AdminPage(){
             </Routes>
             
         </div>
+        </>:<Loader/>}
         </div>
     )
 }
