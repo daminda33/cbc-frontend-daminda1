@@ -9,6 +9,7 @@ import { Toaster } from 'react-hot-toast'
 import ClientWebPage from './pages/client/clientWebPage'
 import { GoogleOAuthProvider } from '@react-oauth/google'
 import ForgetPasswordPage from './pages/client/forgetPassword'
+import AboutUs from './pages/aboutus'
 const clientId = "942076200283-16oeaeu2qkgodqat04ua0chq51h792m6.apps.googleusercontent.com";
 
 

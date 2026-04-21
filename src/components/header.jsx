@@ -9,6 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 export default function Header() {
     const navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(false);
+    const token = localStorage.getItem("token");
     return (
         <header className="h-[100px] bg-blue-600 text-white flex justify-center items-center gap-4 relative">
           {isOpen && (
@@ -50,6 +51,17 @@ export default function Header() {
                                 className="flex items-center gap-3 text-black text-xl px-4 py-3 rounded-lg hover:bg-blue-100 transition-all duration-200"
                                 onClick={() => {
                                     setIsOpen(false);
+                                    navigate("/about-us/");
+                                }}
+                            >
+                                <BiStore className="text-2xl" />
+                                <span>About Us</span>
+                            </button>
+
+                            <button
+                                className="flex items-center gap-3 text-black text-xl px-4 py-3 rounded-lg hover:bg-blue-100 transition-all duration-200"
+                                onClick={() => {
+                                    setIsOpen(false);
                                     navigate("/cart");
                                 }}
                             >
@@ -57,25 +69,37 @@ export default function Header() {
                                 <span>My Cart</span>
                             </button>
 
+                            
+
                         </div>
                     </div>
                 </div>)
             }
             
            
-            <img className="absolute w-[200px] h-[80px] object-cover object-scale-down md:left-[5px] cursor-pointer" onClick={() => (navigate("/"))} src="logo.png" alt="Logo" />
+            <img className="absolute w-[200px] h-[80px] object-cover object-scale-down md:left-[5px] cursor-pointer" onClick={() => (navigate("/"))} src="my logo.png" alt="Logo" />
             <GiHamburgerMenu className="text-white text-4xl md:hidden left-[40px] absolute" onClick={
                 () => {
                     setIsOpen(true);
                 }} />
 
             <div className="hidden md:flex w-full justify-center items-centers gap-4">
-                <Link to="/" className="text-white text-2xl font-bold">Home</Link>
+{/*<Link to="/" className="text-white text-2xl font-bold">Home</Link>*/}
                 <Link to="/products" className="text-white text-2xl font-bold">Products </Link>
                 <Link to="/reviews" className="text-white text-2xl font-bold">Reviews </Link>
                 <Link to="/contact-us" className="text-white text-2xl font-bold">Contact us</Link>
                 <Link to="/about-us" className="text-white text-2xl font-bold">About us </Link>
-                <Link to="/cart" className=""><BiCart className="text-white text-3xl ml-4" /></Link>
+                <Link to="/cart" className="absolute right-[160px]"><BiCart className="text-white text-3xl ml-4" /></Link>
+                {
+                    
+                    token != null && <button className="absolute right-[80px]" onClick={()=>{
+                        localStorage.removeItem("token");
+                        navigate("/login");
+                    }
+                 }>
+                    Logout
+                    </button>
+                }
             </div>
 
 
